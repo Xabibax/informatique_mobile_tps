@@ -1,0 +1,9 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+ 
+ion-header {
+  text-align: center;
+  padding:1em;
+}

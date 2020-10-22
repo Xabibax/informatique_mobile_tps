@@ -1,0 +1,13 @@
+{
+  "appId": "com.capacitor.app",
+  "appName": "capacitor",
+  "bundledWebRuntime": true,
+  "npmClient": "npm",
+  "webDir": "www",
+  "linuxAndroidStudioPath": "/home/xabi/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/201.6858069/bin/studio.sh",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}

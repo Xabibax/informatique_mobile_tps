@@ -1,0 +1,37 @@
+#!/bin/bash
+# Installer Cordova
+npm install -g cordova
+
+# Créer un projet
+NOM_REPERTOIRE=03-cordova
+ID_PROJET=fr.demo.cordova
+NOM_AFFICHE_DE_L_APPLICATION="DemoCordova"
+cordova create $NOM_REPERTOIRE $ID_PROJET $NOM_AFFICHE_DE_L_APPLICATION
+cd $NOM_REPERTOIRE
+
+# Afficher les plateformes
+cordova platform list
+
+# Ajouter la plateforme browser
+cordova platform add browser --save
+
+# Lancer l'application sur un navigateur
+cordova run browser 
+# cordova run browser --target=firefox
+
+# Ajouter la plateforme android
+cordova platform add android
+
+# Déployer
+cordova build
+
+# Lancer l'application sur un appareil connecté
+cordova run android
+
+# Ajouter le plugin cordova-plugin-device au projet
+cordova plugin add cordova-plugin-device --save
+cordova plugin add cordova-plugin-network-information -save
+
+# Pour prendre en compte les modifications
+cordova plugin add cordova-plugin-browsersync --save
+

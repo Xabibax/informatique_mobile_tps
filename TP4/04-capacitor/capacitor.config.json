@@ -1,0 +1,12 @@
+{
+  "appId": "com.capacitor.tp4",
+  "appName": "04-capacitor",
+  "bundledWebRuntime": true,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}

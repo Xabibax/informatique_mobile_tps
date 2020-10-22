@@ -1,0 +1,13 @@
+body {
+    min-width: 350px;
+}
+
+ion-header {
+    text-align: center;
+    padding:1em;
+}
+
+ion-card {
+    max-width: 800px;
+    margin: auto;
+}

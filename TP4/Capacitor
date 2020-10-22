@@ -1,0 +1,27 @@
+#!/bin/bash
+# Create a Capacitor project
+NOM_REPERTOIRE=capacitor
+ID_PROJET=com.capacitor.app
+NOM_AFFICHE_DE_L_APPLICATION="capacitor"
+NPM_CLIENT=npm
+
+npm i --save @capacitor/core @capacitor/cli
+npx cap create --npm-client=$NPM_CLIENT $NOM_REPERTOIRE "$NOM_AFFICHE_DE_L_APPLICATION" $ID_PROJET
+
+# Ajouter la plateforme android
+npx cap add android
+# Ajouter le chemin d'accès à ANdroidStudio dans le capacitor.config.json
+#  {
+#    ...
+#    "linuxAndroidStudioPath": "/home/xabi/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/201.6858069/bin/studio.sh",
+#    ...
+#  }
+# npx cap open android
+
+# Ajouter la pateforme electron 
+npm i --save @capacitor-community/electron
+npx cap add @capacitor-community/electron
+# npx cap open @capacitor-community/electron
+
+# Synchroniser les projets
+npx cap copy
