@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import BoutonAction from './BoutonAction'
 
@@ -7,16 +7,18 @@ import BoutonAction from './BoutonAction'
  *
  * TODO modifier le code pour afficher le titre de l'action et les boutons associés.
  */
-const UneAction = () => (
+const UneAction = ({action, changeActionState}) => {
+    return (
     <View style={styles.conteneurUneAction}>
         <Text style={styles.texteUneAction}>
-            Ici bientôt le titre de l'action
+            {action.id}
         </Text>
         <View style={styles.boutons}>
-
+            <BoutonAction type={'Terminer'} action={action} changeActionState={changeActionState}/>
+            <BoutonAction type={'Supprimer'} action={action} changeActionState={changeActionState}/>
         </View>
-    </View>
-)
+    </View>)
+}
 
 const styles = StyleSheet.create({
     conteneurUneAction: {
@@ -39,6 +41,9 @@ const styles = StyleSheet.create({
     },
     texteUneAction: {
         fontSize: 17
+    },
+    texteUneActionState: {
+        fontSize: 10
     },
     boutons: {
         flex: 1,

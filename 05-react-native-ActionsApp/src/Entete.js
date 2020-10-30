@@ -12,11 +12,12 @@ import { StyleSheet, Text, View } from 'react-native'
  *
  * TODO 3. Appliquer le style "texteEntete" à l'élément <Text>
  */
-export default Entete = () => (
-    <View>
-        <Text>Entete</Text>
+let Entete = () => (
+    <View style={styles.entete}>
+        <Text style={styles.texteEntete}>Actions !</Text>
     </View>
 )
+export default Entete;
 
 const styles = StyleSheet.create({
     // style à appliquer à l'élément <View>

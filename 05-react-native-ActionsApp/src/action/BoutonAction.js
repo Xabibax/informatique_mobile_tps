@@ -1,5 +1,5 @@
-import React from 'react'
-import {StyleSheet, Text, TouchableHighlight} from 'react-native'
+import React, { useState } from 'react'
+import { Button, StyleSheet, Text, TouchableHighlight } from 'react-native'
 
 /**
  * Le composant BoutonAction est paramétrable via son nom.
@@ -13,15 +13,45 @@ import {StyleSheet, Text, TouchableHighlight} from 'react-native'
  * TODO 3. Si le nom du bouton est 'Supprimer', alors appliquer le style 'supprimer' à l'élément <Text>
  *
  */
-const BoutonAction = ({nom}) => (
-    <TouchableHighlight
-        underlayColor='#efefef'
-        style={styles.bouton}>
-        <Text style={styles.texte}>
-            A changer
-        </Text>
-    </TouchableHighlight>
-)
+const BoutonAction = ({ type, action, changeActionState }) => {
+    const [terminer, setTerminer] = useState(action.state.terminer)
+    const [supprimer, setSupprimer] = useState(action.state.supprimer)
+    let style = styles.texte
+    if (type === 'Terminer' && terminer) style = styles.terminer
+    else if (type === 'Supprimer' && supprimer) style = styles.supprimer
+    return (
+        <TouchableHighlight
+            underlayColor='#efefef'
+            style={styles.bouton}>
+                <Text
+                    title={type}
+                    style={style}
+                    onPress={() => { if(type === 'Terminer') {
+                        setTerminer(terminer === false)
+                        changeActionState({
+                            id: action.id,
+                            state: {
+                                terminer: terminer === false,
+                                supprimer: action.state.supprimer,
+                            },
+                            title: type
+                        })
+                    } else if (type === 'Supprimer') {
+                        setSupprimer(supprimer === false)
+                        changeActionState({
+                            id: action.id,
+                            state: {
+                                terminer: action.state.terminer,
+                                supprimer: supprimer === false,
+                            },
+                            title: type
+                        })
+                    }
+                       
+                    }} >{type}</Text>
+        </TouchableHighlight>
+    )
+}
 const styles = StyleSheet.create({
     bouton: {
         alignSelf: 'flex-end',
@@ -34,7 +64,7 @@ const styles = StyleSheet.create({
     texte: {
         color: '#666666',
     },
-    termine: {
+    terminer: {
         color: 'green',
         fontWeight: 'bold',
     },
