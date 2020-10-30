@@ -2,6 +2,7 @@ import 'package:convertisseur_devises/models/devise.dart';
 import 'package:convertisseur_devises/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'dart:developer'; //(auto import will do this even)
 
 class ConvertisseurDevisePage extends StatefulWidget {
   ConvertisseurDevisePage();
@@ -40,6 +41,11 @@ class _ConvertisseurDevisePage extends State<ConvertisseurDevisePage> {
         Spacer(),
         TextField(
           style: AppStyle.inputStyle,
+          onChanged: (saisie) {
+            setState(() {
+              _valeur = double.parse(saisie);
+            });
+          },
         ),
         Spacer(),
         Text(
@@ -47,29 +53,62 @@ class _ConvertisseurDevisePage extends State<ConvertisseurDevisePage> {
           style: AppStyle.labelStyle,
         ),
         Spacer(),
-        DropdownButton(isExpanded: true, onChanged: (newVal) => true, items: [
-          DropdownMenuItem<Devise>(
-            child: Text('Val 1'),
-          ),
-          DropdownMenuItem<Devise>(
-            child: Text('Val 2'),
-          ),
-        ]),
+        DropdownButton(
+            isExpanded: true,
+            value: _deviseInitial,
+            onChanged: (newVal) => setState(() {
+                  _deviseInitial = newVal;
+                }),
+            items: [
+              DropdownMenuItem<Devise>(
+                child: Text(libelles[Devise.EURO]),
+                value: Devise.EURO,
+              ),
+              DropdownMenuItem<Devise>(
+                child: Text(libelles[Devise.DOLLAR]),
+                value: Devise.DOLLAR,
+              ),
+              DropdownMenuItem<Devise>(
+                child: Text(libelles[Devise.LIVRE_STERLING]),
+                value: Devise.LIVRE_STERLING,
+              ),
+            ]),
         Spacer(),
         Text('Vers', style: AppStyle.labelStyle),
         Spacer(),
-        DropdownButton(isExpanded: true, onChanged: (newVal) => true, items: [
-          DropdownMenuItem<Devise>(
-            child: Text('Val 1'),
-          ),
-          DropdownMenuItem<Devise>(
-            child: Text('Val 2'),
-          ),
-        ]),
+        DropdownButton(
+            isExpanded: true,
+            value: _deviseFinale,
+            onChanged: (newVal) => setState(() {
+                  _deviseFinale = newVal;
+                }),
+            items: [
+              DropdownMenuItem<Devise>(
+                child: Text(libelles[Devise.EURO]),
+                value: Devise.EURO,
+              ),
+              DropdownMenuItem<Devise>(
+                child: Text(libelles[Devise.DOLLAR]),
+                value: Devise.DOLLAR,
+              ),
+              DropdownMenuItem<Devise>(
+                child: Text(libelles[Devise.LIVRE_STERLING]),
+                value: Devise.LIVRE_STERLING,
+              ),
+            ]),
         Spacer(
           flex: 2,
         ),
-        ElevatedButton(onPressed: () => true, child: Text('Convertir')),
+        ElevatedButton(
+            onPressed: () => setState(() {
+                  _resultat = (100 *
+                              taux[_deviseFinale] *
+                              _valeur /
+                              taux[_deviseInitial])
+                          .roundToDouble() /
+                      100;
+                }),
+            child: Text('Convertir')),
         Spacer(
           flex: 2,
         ),
