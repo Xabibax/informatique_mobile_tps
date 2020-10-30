@@ -1,8 +1,9 @@
 import 'package:convertisseur_devises/models/devise.dart';
 import 'package:convertisseur_devises/styles.dart';
+import 'package:convertisseur_devises/widgets/liste_devises.dart';
+import 'package:convertisseur_devises/widgets/saisie_nombre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:developer'; //(auto import will do this even)
 
 class ConvertisseurDevisePage extends StatefulWidget {
   ConvertisseurDevisePage();
@@ -39,63 +40,34 @@ class _ConvertisseurDevisePage extends State<ConvertisseurDevisePage> {
           style: AppStyle.labelStyle,
         ),
         Spacer(),
-        TextField(
-          style: AppStyle.inputStyle,
-          onChanged: (saisie) {
-            setState(() {
-              _valeur = double.parse(saisie);
-            });
-          },
-        ),
+        SaisieNombre(changeValeur: (saisie) {
+          setState(() {
+            _valeur = saisie;
+          });
+        }),
         Spacer(),
         Text(
           'De',
           style: AppStyle.labelStyle,
         ),
         Spacer(),
-        DropdownButton(
-            isExpanded: true,
+        ListeDevise(
             value: _deviseInitial,
-            onChanged: (newVal) => setState(() {
-                  _deviseInitial = newVal;
-                }),
-            items: [
-              DropdownMenuItem<Devise>(
-                child: Text(libelles[Devise.EURO]),
-                value: Devise.EURO,
-              ),
-              DropdownMenuItem<Devise>(
-                child: Text(libelles[Devise.DOLLAR]),
-                value: Devise.DOLLAR,
-              ),
-              DropdownMenuItem<Devise>(
-                child: Text(libelles[Devise.LIVRE_STERLING]),
-                value: Devise.LIVRE_STERLING,
-              ),
-            ]),
+            changeValeur: (saisie) {
+              setState(() {
+                _deviseInitial = saisie;
+              });
+            }),
         Spacer(),
         Text('Vers', style: AppStyle.labelStyle),
         Spacer(),
-        DropdownButton(
-            isExpanded: true,
+        ListeDevise(
             value: _deviseFinale,
-            onChanged: (newVal) => setState(() {
-                  _deviseFinale = newVal;
-                }),
-            items: [
-              DropdownMenuItem<Devise>(
-                child: Text(libelles[Devise.EURO]),
-                value: Devise.EURO,
-              ),
-              DropdownMenuItem<Devise>(
-                child: Text(libelles[Devise.DOLLAR]),
-                value: Devise.DOLLAR,
-              ),
-              DropdownMenuItem<Devise>(
-                child: Text(libelles[Devise.LIVRE_STERLING]),
-                value: Devise.LIVRE_STERLING,
-              ),
-            ]),
+            changeValeur: (saisie) {
+              setState(() {
+                _deviseFinale = saisie;
+              });
+            }),
         Spacer(
           flex: 2,
         ),
